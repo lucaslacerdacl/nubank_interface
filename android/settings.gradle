@@ -1,0 +1,3 @@
+rootProject.name = 'nubank_interface'
+
+include ':app'
