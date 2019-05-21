@@ -1,7 +1,8 @@
+import { Animated } from 'react-native';
 import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
 
-export const Container = styled.ScrollView`
+export const Container = styled(Animated.ScrollView)`
     padding: 0 7px;
     margin: 0 23px;
     max-height: 460px;

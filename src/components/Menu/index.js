@@ -15,9 +15,14 @@ import {
 import QRCode from 'react-native-qrcode';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-export default function Menu () {
+export default function Menu ({ translateY }) {
     return (
-        <Container>
+        <Container style={{
+            opacity: translateY.interpolate({
+                inputRange: [0, 150],
+                outputRange: [0, 1]
+            })
+        }}>
             <Code>
                 <QRCode value="http://google.com" size={80} bgColor="#8B10AE" fgColor="#FFF" />
             </Code>
