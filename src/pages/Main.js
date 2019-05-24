@@ -3,7 +3,7 @@ import { Container } from './style';
 import Header from '../components/Header';
 import Tabs from '../components/Tabs';
 import Content from '../components/Content';
-import { Animated } from 'react-native';
+import { Animated, Alert } from 'react-native';
 import { State } from 'react-native-gesture-handler';
 
 export default class Main extends Component {
@@ -27,40 +27,52 @@ export default class Main extends Component {
     );
   }
 
+  setValueAndOffset(value, offset) {
+    this.translateY.setValue(value);
+    this.translateY.setOffset(offset);
+  }
+
+  startAnimation(value, callback) {
+    Animated.timing(this.translateY, {
+      toValue: value,
+      duration: 200,
+      useNativeDriver: true
+    }).start(callback);
+  }
+
   onChange = (event) => {
     if (event.nativeEvent.oldState === State.ACTIVE) {
       const { translationY } = event.nativeEvent;
 
-      // this.offset += translationY;
+      this.offset += translationY;
 
       if (translationY >= 100) {
         this.opened = true;
       } else {
         this.opened = false;
-        // this.translateY.setValue(this.offset);
-        // this.translateY.setOffset(0);
-        // this.offset = 0;
+        this.setValueAndOffset(this.offset, 0);
+        this.offset = 0;
       }
 
-      Animated.timing(this.translateY, {
-        toValue: this.opened ? 460 : 0,
-        duration: 200,
-        useNativeDriver: true
-      }).start(() => {
-        // this.offset = this.opened ? 460 : 0;
-        // this.translateY.setOffset(this.offset);
-        // this.translateY.setValue(0);
+      const value = this.opened ? 460 : 0;
+      this.startAnimation(value, () => {
+        this.offset = this.opened ? 460 : 0;
+        this.setValueAndOffset(0, this.offset);
       });
     }
   }
 
   onPress = () => {
-    Animated.timing(this.translateY, {
-      toValue: this.opened ? 0 : 460,
-      duration: 200,
-      useNativeDriver: true
-    }).start(() => {
+    if (this.opened) {
+      this.setValueAndOffset(460, 0);
+    }
+
+    const value = this.opened ? 0 : 460;
+    this.startAnimation(value, () => {
       this.opened = !this.opened;
+      if (this.opened) {
+        this.setValueAndOffset(0, 460);
+      }
     });
   }
 
