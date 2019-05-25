@@ -6,6 +6,9 @@ export const Container = styled(Animated.ScrollView)`
     padding: 0 7px;
     margin: 0 23px;
     max-height: 460px;
+    position: absolute;
+    left: 0;
+    right: 0;
 `;
 export const Code = styled.View`
     background: #fff;

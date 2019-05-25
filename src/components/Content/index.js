@@ -1,50 +1,58 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
 	Container,
-	Card,
-	CardContent,
-	CardHeader,
-	Title,
-	Description,
-	CardFooter,
-	Annotation
+	ContainerCard,
+	TabsContainer
 } from './style';
 import Menu from '../Menu';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Card from '../Card';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 
 export default class Content extends Component {
 
+	static propTypes = {
+		translateY: PropTypes.object,
+		animatedEvent: PropTypes.object,
+		onChange: PropTypes.func
+	}
+
+	setTranslationYStyle = () => {
+		const { translateY } = this.props;
+
+		return {
+			transform: [{
+				translateY: translateY.interpolate({
+					inputRange: [0, 460],
+					outputRange: [0, 460],
+					extrapolate: 'clamp'
+				})
+			}]
+		};
+	}
+
 	render() {
+		const { translateY, animatedEvent, onChange } = this.props;
+
 		return (
 			<Container>
-				<Menu translateY={this.props.translateY} />
+				<Menu translateY={translateY} />
 				<PanGestureHandler
-					onGestureEvent={this.props.animatedEvent}
-					onHandlerStateChange={this.props.onChange}>
-					<Card style={{
-						transform: [{
-							translateY: this.props.translateY.interpolate({
-								inputRange: [0, 460],
-								outputRange: [0, 460],
-								extrapolate: 'clamp'
-							})
-						}]
-					}}>
-						<CardHeader>
-							<Icon name="attach-money" size={28} color="#666" />
-							<Icon name="visibility-off" size={28} color="#999" />
-						</CardHeader>
-						<CardContent>
-							<Title>Saldo disponível</Title>
-							<Description>R$ 5.000,00</Description>
-						</CardContent>
-						<CardFooter>
-							<Icon name="account-balance" size={28} color="#666" />
-							<Annotation>Transferência de R$ 20,00 recebida de Diego Schell hoje às 06:00h</Annotation>
-							<Icon name="chevron-right" size={28} color="#999" />
-						</CardFooter>
-					</Card>
+					onGestureEvent={animatedEvent}
+					onHandlerStateChange={onChange}>
+					<ContainerCard style={this.setTranslationYStyle()}>
+						<TabsContainer>
+							<Card>
+								<Card.Account />
+							</Card>
+							<Card>
+								<Card.Account />
+							</Card>
+							<Card>
+								<Card.Account />
+							</Card>
+						</TabsContainer>
+					</ContainerCard>
 				</PanGestureHandler>
 			</Container>
 		)

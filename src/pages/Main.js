@@ -8,24 +8,21 @@ import { State } from 'react-native-gesture-handler';
 
 export default class Main extends Component {
 
-  constructor(props) {
-    super(props);
-    this.translateY = new Animated.Value(0);
-    this.offset = 0;
-    this.opened = false;
-    this.animatedEvent = Animated.event(
-      [
-        {
-          nativeEvent: {
-            translationY: this.translateY
-          }
-        }
-      ],
+  translateY = new Animated.Value(0);
+  offset = 0;
+  opened = false;
+  animatedEvent = Animated.event(
+    [
       {
-        useNativeDriver: true
+        nativeEvent: {
+          translationY: this.translateY
+        }
       }
-    );
-  }
+    ],
+    {
+      useNativeDriver: true
+    }
+  );
 
   setValueAndOffset(value, offset) {
     this.translateY.setValue(value);
@@ -35,7 +32,7 @@ export default class Main extends Component {
   startAnimation(value, callback) {
     Animated.timing(this.translateY, {
       toValue: value,
-      duration: 200,
+      duration: 300,
       useNativeDriver: true
     }).start(callback);
   }
