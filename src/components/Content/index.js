@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-	Container,
-	ContainerCard,
-	TabsContainer
-} from './style';
+import { Container, CardsContainer } from './style';
 import Menu from '../Menu';
-import Card from '../Card';
+import Cards from '../Cards';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 
 export default class Content extends Component {
@@ -40,19 +36,9 @@ export default class Content extends Component {
 				<PanGestureHandler
 					onGestureEvent={animatedEvent}
 					onHandlerStateChange={onChange}>
-					<ContainerCard style={this.setTranslationYStyle()}>
-						<TabsContainer>
-							<Card>
-								<Card.Account />
-							</Card>
-							<Card>
-								<Card.Account />
-							</Card>
-							<Card>
-								<Card.Account />
-							</Card>
-						</TabsContainer>
-					</ContainerCard>
+					<CardsContainer style={this.setTranslationYStyle()}>
+						<Cards />
+					</CardsContainer>
 				</PanGestureHandler>
 			</Container>
 		)

@@ -1,9 +1,16 @@
 import styled from 'styled-components/native';
+import { Dimensions } from "react-native";
+
+export const TabsContainer = styled.ScrollView.attrs({
+    horizontal: true,
+    showsHorizontalScrollIndicator: false
+})``;
 
 export const Container = styled.View`
     background: #fff;
     border-radius: 4px;
-    width: 335px;
+    flex: 1;
+    width: ${Math.round(Dimensions.get('window').width) - 40}px;
     margin: 0 20px;
 `;
 
@@ -32,4 +39,21 @@ export const Annotation = styled.Text`
     font-size: 12px;
     color: #333;
     padding: 0 30px;
+`;
+
+export const Title = styled.Text`
+    font-size: 13px;
+    color: #999;
+    padding-bottom: 3px;
+`;
+
+export const Description = styled.Text`
+    font-size: 30px;
+    color: #333;
+`;
+
+export const AmountBlock = styled.View`
+    width: 220px;
+    height: 36px;
+    background: #f8f8f8;
 `;

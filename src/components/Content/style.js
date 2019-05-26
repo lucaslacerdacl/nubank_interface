@@ -7,11 +7,6 @@ export const Container = styled.View`
     z-index: 5;
 `;
 
-export const TabsContainer = styled.ScrollView.attrs({
-    horizontal: true,
-    showsHorizontalScrollIndicator: false
-})``;
-
-export const ContainerCard = styled(Animated.View)`
+export const CardsContainer = styled(Animated.View)`
     flex: 1;
 `;

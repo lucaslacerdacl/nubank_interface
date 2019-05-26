@@ -3,7 +3,7 @@ import { Container } from './style';
 import Header from '../components/Header';
 import Tabs from '../components/Tabs';
 import Content from '../components/Content';
-import { Animated, Alert } from 'react-native';
+import { Animated } from 'react-native';
 import { State } from 'react-native-gesture-handler';
 
 export default class Main extends Component {
