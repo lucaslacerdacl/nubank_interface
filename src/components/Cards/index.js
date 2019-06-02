@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { TabsContainer, TabsIndicator, Indicator, IndicatorStyles } from './style';
+import { TabsIndicator, Indicator, IndicatorStyles } from './style';
 import { Dimensions } from "react-native";
 import AccountCard from '../AccountCard';
 import InvoiceCard from '../InvoiceCard';
 import RewardsCard from '../RewardsCard';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default class Cards extends Component {
 
-  static props = {
-    children: PropTypes.node
-  }
-
   state = {
-		showAmount: false,
 		index: 1
   }
 
@@ -60,12 +55,6 @@ export default class Cards extends Component {
 		}
 		this.lastOffset = e.nativeEvent.contentOffset.x;
   }
-  
-  setAmountVisibility = () => {
-    this.setState(prevState => ({
-      showAmount: !prevState.showAmount
-    }))
-	}
 	
 	checkIndicatorPosition = (index) => {
 		return this.state.index === index;
@@ -74,11 +63,11 @@ export default class Cards extends Component {
   render() {
     return (
 			<>
-      <TabsContainer ref='scrollView' onScrollEndDrag={this.onScroll}>
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} ref='scrollView' onScrollEndDrag={this.onScroll}>
         <InvoiceCard />
         <AccountCard />
         <RewardsCard />
-      </TabsContainer>
+      </ScrollView>
 			<TabsIndicator>
 				<Indicator style={[this.checkIndicatorPosition(1) ? IndicatorStyles.currentTab : IndicatorStyles.tab]} />
 				<Indicator style={[this.checkIndicatorPosition(2) ? IndicatorStyles.currentTab : IndicatorStyles.tab]} />

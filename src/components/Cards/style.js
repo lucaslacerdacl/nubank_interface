@@ -1,11 +1,6 @@
 import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
 
-export const TabsContainer = styled.ScrollView.attrs({
-    horizontal: true,
-    showsHorizontalScrollIndicator: false
-})``;
-
 export const TabsIndicator = styled.View`
     flex-direction: row;
     align-items: center;
